@@ -1,11 +1,11 @@
 package com.devbrackets.android.playlistcoredemo.data;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class Samples {
     @NonNull

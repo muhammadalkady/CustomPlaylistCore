@@ -3,11 +3,12 @@ package com.devbrackets.android.playlistcoredemo.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.devbrackets.android.playlistcore.annotation.SupportedMediaType;
 import com.devbrackets.android.playlistcore.manager.BasePlaylistManager;

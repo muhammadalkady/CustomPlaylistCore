@@ -7,12 +7,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.devbrackets.android.playlistcoredemo.R;
 import com.devbrackets.android.playlistcoredemo.data.Samples;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
 
 public class SampleListAdapter extends BaseAdapter {
 

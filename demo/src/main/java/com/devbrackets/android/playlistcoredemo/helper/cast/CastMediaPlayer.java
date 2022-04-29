@@ -2,9 +2,10 @@ package com.devbrackets.android.playlistcoredemo.helper.cast;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.util.Log;
 
 import com.devbrackets.android.exomedia.util.MediaSourceUtil;
 import com.devbrackets.android.playlistcore.api.MediaPlayerApi;
@@ -32,14 +33,6 @@ import java.util.Map;
  * A Simple implementation of the {@link MediaPlayerApi} that handles Chromecast
  */
 public class CastMediaPlayer implements MediaPlayerApi<MediaItem> {
-    public interface OnConnectionChangeListener {
-        void onCastMediaPlayerConnectionChange(@NonNull CastMediaPlayer player, @NonNull RemoteConnectionState state);
-    }
-
-    public interface OnMediaInfoChangeListener {
-        void onMediaInfoChange(@NonNull CastMediaPlayer player);
-    }
-
     private static final String TAG = "CastMediaPlayer";
     @NonNull
     private static final Map<String, String> extensionToMimeMap = new HashMap<>();
@@ -58,22 +51,18 @@ public class CastMediaPlayer implements MediaPlayerApi<MediaItem> {
     private final OnConnectionChangeListener stateListener;
     @NonNull
     private final OnMediaInfoChangeListener infoChangeListener;
-
     @Nullable
     private SessionManager sessionManager;
     @Nullable
     private MediaStatusListener<MediaItem> mediaStatusListener;
-
     @NonNull
     private RemoteConnectionState remoteConnectionState = RemoteConnectionState.NOT_CONNECTED;
-
     @NonNull
     private CastResultCallback castResultCallback = new CastResultCallback();
     @NonNull
     private SeekResultCallback seekResultCallback = new SeekResultCallback();
     @NonNull
     private PreparedResultCallback preparedResultCallback = new PreparedResultCallback();
-
     public CastMediaPlayer(@NonNull Context context, @NonNull OnConnectionChangeListener stateListener, @NonNull OnMediaInfoChangeListener infoChangeListener) {
         this.stateListener = stateListener;
         this.infoChangeListener = infoChangeListener;
@@ -247,6 +236,14 @@ public class CastMediaPlayer implements MediaPlayerApi<MediaItem> {
     private void updateState(@NonNull RemoteConnectionState state) {
         remoteConnectionState = state;
         stateListener.onCastMediaPlayerConnectionChange(this, state);
+    }
+
+    public interface OnConnectionChangeListener {
+        void onCastMediaPlayerConnectionChange(@NonNull CastMediaPlayer player, @NonNull RemoteConnectionState state);
+    }
+
+    public interface OnMediaInfoChangeListener {
+        void onMediaInfoChange(@NonNull CastMediaPlayer player);
     }
 
     /**

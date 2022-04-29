@@ -9,6 +9,14 @@ public class App extends Application {
     private static App application;
     private static PlaylistManager playlistManager;
 
+    public static PlaylistManager getPlaylistManager() {
+        return playlistManager;
+    }
+
+    public static App getApplication() {
+        return application;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -23,13 +31,5 @@ public class App extends Application {
 
         application = null;
         playlistManager = null;
-    }
-
-    public static PlaylistManager getPlaylistManager() {
-        return playlistManager;
-    }
-
-    public static App getApplication() {
-        return application;
     }
 }

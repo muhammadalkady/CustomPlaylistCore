@@ -3,6 +3,7 @@ package com.devbrackets.android.playlistcoredemo.service;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -16,28 +17,20 @@ import com.devbrackets.android.playlistcoredemo.data.MediaItem;
 
 
 public class MediaImageProvider implements ImageProvider<MediaItem> {
-    interface OnImageUpdatedListener {
-        void onImageUpdated();
-    }
-
     @NonNull
     private RequestManager glide;
     @NonNull
     private OnImageUpdatedListener listener;
-
     @NonNull
     private NotificationImageTarget notificationImageTarget = new NotificationImageTarget();
     @NonNull
     private RemoteViewImageTarget remoteViewImageTarget = new RemoteViewImageTarget();
-
     @NonNull
     private Bitmap defaultNotificationImage;
-
     @Nullable
     private Bitmap notificationImage;
     @Nullable
     private Bitmap artworkImage;
-
     public MediaImageProvider(@NonNull Context context, @NonNull OnImageUpdatedListener listener) {
         glide = Glide.with(context.getApplicationContext());
         this.listener = listener;
@@ -71,6 +64,10 @@ public class MediaImageProvider implements ImageProvider<MediaItem> {
     public void updateImages(@NonNull MediaItem playlistItem) {
         glide.asBitmap().load(playlistItem.getThumbnailUrl()).into(notificationImageTarget);
         glide.asBitmap().load(playlistItem.getArtworkUrl()).into(remoteViewImageTarget);
+    }
+
+    interface OnImageUpdatedListener {
+        void onImageUpdated();
     }
 
     /**

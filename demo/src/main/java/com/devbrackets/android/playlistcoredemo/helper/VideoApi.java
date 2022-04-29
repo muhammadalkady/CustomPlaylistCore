@@ -2,17 +2,17 @@ package com.devbrackets.android.playlistcoredemo.helper;
 
 import android.net.Uri;
 
+import androidx.annotation.FloatRange;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.devbrackets.android.exomedia.ui.widget.VideoControls;
 import com.devbrackets.android.exomedia.ui.widget.VideoView;
 import com.devbrackets.android.playlistcore.data.PlaybackState;
 import com.devbrackets.android.playlistcore.listener.PlaylistListener;
 import com.devbrackets.android.playlistcore.manager.BasePlaylistManager;
 import com.devbrackets.android.playlistcoredemo.data.MediaItem;
-
-import androidx.annotation.FloatRange;
-import androidx.annotation.IntRange;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class VideoApi extends BaseMediaApi implements PlaylistListener<MediaItem> {
     public VideoView videoView;
@@ -64,7 +64,7 @@ public class VideoApi extends BaseMediaApi implements PlaylistListener<MediaItem
 
     @Override
     public void seekTo(@IntRange(from = 0L) long milliseconds) {
-        videoView.seekTo((int)milliseconds);
+        videoView.seekTo((int) milliseconds);
     }
 
 

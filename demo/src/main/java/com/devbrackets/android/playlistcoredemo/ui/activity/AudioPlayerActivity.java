@@ -1,10 +1,6 @@
 package com.devbrackets.android.playlistcoredemo.ui.activity;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.mediarouter.app.MediaRouteButton;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ImageButton;
@@ -12,6 +8,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.mediarouter.app.MediaRouteButton;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
@@ -69,6 +70,32 @@ public class AudioPlayerActivity extends AppCompatActivity implements PlaylistLi
     private int selectedPosition = 0;
 
     private RequestManager glide;
+
+    /**
+     * Formats the specified milliseconds to a human readable format
+     * in the form of (Hours : Minutes : Seconds).  If the specified
+     * milliseconds is less than 0 the resulting format will be
+     * "--:--" to represent an unknown time
+     *
+     * @param milliseconds The time in milliseconds to format
+     * @return The human readable time
+     */
+    public static String formatMs(long milliseconds) {
+        if (milliseconds < 0) {
+            return "--:--";
+        }
+
+        long seconds = (milliseconds % DateUtils.MINUTE_IN_MILLIS) / DateUtils.SECOND_IN_MILLIS;
+        long minutes = (milliseconds % DateUtils.HOUR_IN_MILLIS) / DateUtils.MINUTE_IN_MILLIS;
+        long hours = (milliseconds % DateUtils.DAY_IN_MILLIS) / DateUtils.HOUR_IN_MILLIS;
+
+        formatBuilder.setLength(0);
+        if (hours > 0) {
+            return formatter.format("%d:%02d:%02d", hours, minutes, seconds).toString();
+        }
+
+        return formatter.format("%02d:%02d", minutes, seconds).toString();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +182,7 @@ public class AudioPlayerActivity extends AppCompatActivity implements PlaylistLi
 
         if (!userInteracting) {
             seekBar.setSecondaryProgress((int) (progress.getDuration() * progress.getBufferPercentFloat()));
-            seekBar.setProgress((int)progress.getPosition());
+            seekBar.setProgress((int) progress.getPosition());
             currentPositionView.setText(formatMs(progress.getPosition()));
         }
 
@@ -206,7 +233,6 @@ public class AudioPlayerActivity extends AppCompatActivity implements PlaylistLi
         startPlayback(generatedPlaylist);
     }
 
-
     /**
      * Called when we receive a notification that the current item is
      * done loading.  This will then update the view visibilities and
@@ -236,7 +262,7 @@ public class AudioPlayerActivity extends AppCompatActivity implements PlaylistLi
     public void loadCompleted() {
         playPauseButton.setVisibility(View.VISIBLE);
         previousButton.setVisibility(View.VISIBLE);
-        nextButton.setVisibility(View.VISIBLE );
+        nextButton.setVisibility(View.VISIBLE);
 
         loadingBar.setVisibility(View.INVISIBLE);
     }
@@ -248,7 +274,7 @@ public class AudioPlayerActivity extends AppCompatActivity implements PlaylistLi
     public void restartLoading() {
         playPauseButton.setVisibility(View.INVISIBLE);
         previousButton.setVisibility(View.INVISIBLE);
-        nextButton.setVisibility(View.INVISIBLE );
+        nextButton.setVisibility(View.INVISIBLE);
 
         loadingBar.setVisibility(View.VISIBLE);
     }
@@ -259,7 +285,7 @@ public class AudioPlayerActivity extends AppCompatActivity implements PlaylistLi
      * @param duration The duration of the media item in milliseconds
      */
     private void setDuration(long duration) {
-        seekBar.setMax((int)duration);
+        seekBar.setMax((int) duration);
         durationView.setText(formatMs(duration));
     }
 
@@ -354,32 +380,6 @@ public class AudioPlayerActivity extends AppCompatActivity implements PlaylistLi
             playlistManager.setCurrentPosition(selectedPosition);
             playlistManager.play(0, false);
         }
-    }
-
-    /**
-     * Formats the specified milliseconds to a human readable format
-     * in the form of (Hours : Minutes : Seconds).  If the specified
-     * milliseconds is less than 0 the resulting format will be
-     * "--:--" to represent an unknown time
-     *
-     * @param milliseconds The time in milliseconds to format
-     * @return The human readable time
-     */
-    public static String formatMs(long milliseconds) {
-        if (milliseconds < 0) {
-            return "--:--";
-        }
-
-        long seconds = (milliseconds % DateUtils.MINUTE_IN_MILLIS) / DateUtils.SECOND_IN_MILLIS;
-        long minutes = (milliseconds % DateUtils.HOUR_IN_MILLIS) / DateUtils.MINUTE_IN_MILLIS;
-        long hours = (milliseconds % DateUtils.DAY_IN_MILLIS) / DateUtils.HOUR_IN_MILLIS;
-
-        formatBuilder.setLength(0);
-        if (hours > 0) {
-            return formatter.format("%d:%02d:%02d", hours, minutes, seconds).toString();
-        }
-
-        return formatter.format("%02d:%02d", minutes, seconds).toString();
     }
 
     /**

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.PowerManager;
+
 import androidx.annotation.FloatRange;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
@@ -66,7 +67,7 @@ public class AudioApi extends BaseMediaApi {
 
     @Override
     public void seekTo(@IntRange(from = 0L) long milliseconds) {
-        audioPlayer.seekTo((int)milliseconds);
+        audioPlayer.seekTo((int) milliseconds);
     }
 
     @Override
