@@ -1,8 +1,18 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'maven-publish'
 
 afterEvaluate {
-  apply from: 'gradle/publish.gradle'
+  publishing {
+    publications {
+      release(MavenPublication) {
+        from components.release
+        groupId = 'kady.muhammad'
+        artifactId = 'CustomPlaylistCore'
+        version = '1.0.0'
+      }
+    }
+  }
 }
 
 /**
@@ -33,11 +43,11 @@ dependencies {
 }
 
 android {
-  compileSdkVersion 31
+  compileSdkVersion 32
 
   defaultConfig {
     minSdkVersion 21
-    targetSdkVersion 31
+    targetSdkVersion 32
   }
 
   lintOptions {
