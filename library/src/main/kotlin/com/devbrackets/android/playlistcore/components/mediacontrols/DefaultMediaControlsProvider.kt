@@ -22,6 +22,7 @@ import android.support.v4.media.session.PlaybackStateCompat
 import com.devbrackets.android.playlistcore.data.MediaInfo
 
 open class DefaultMediaControlsProvider(protected val context: Context) : MediaControlsProvider {
+
     protected var enabled = true
 
     /**

@@ -39,8 +39,9 @@ import com.devbrackets.android.playlistcore.data.RemoteActions
  */
 open class DefaultPlaylistNotificationProvider(protected val context: Context) :
     PlaylistNotificationProvider {
+
     companion object {
-        const val CHANNEL_ID = "PlaylistCoreMediaNotificationChannel"
+        const val CHANNEL_ID = "QuranRadioMediaNotificationChannel"
     }
 
     protected val notificationManager: NotificationManager by lazy {
@@ -58,29 +59,18 @@ open class DefaultPlaylistNotificationProvider(protected val context: Context) :
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             buildNotificationChannel()
         }
-
         return NotificationCompat.Builder(context, CHANNEL_ID).apply {
             setSmallIcon(info.appIcon)
             setLargeIcon(info.largeNotificationIcon)
-
-            var contentText = info.album
-            if (info.artist.isNotBlank()) {
-                contentText += if (contentText.isNotBlank()) " - " + info.artist else info.artist
-            }
-
             setContentTitle(info.title)
-            setContentText(contentText)
-
+            setContentText("${info.album} - ${info.artist}")
             setContentIntent(clickPendingIntent)
             setDeleteIntent(createPendingIntent(serviceClass, RemoteActions.ACTION_STOP))
-
             val allowSwipe = !(info.mediaState.isPlaying)
             setAutoCancel(allowSwipe)
             setOngoing(!allowSwipe)
-
             setCategory(Notification.CATEGORY_TRANSPORT)
             setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-
             setActions(this, info, serviceClass)
             setStyle(buildMediaStyle(mediaSession, serviceClass))
         }.build()

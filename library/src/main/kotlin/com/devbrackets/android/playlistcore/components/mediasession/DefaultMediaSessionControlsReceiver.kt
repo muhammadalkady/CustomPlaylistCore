@@ -31,7 +31,7 @@ import com.devbrackets.android.playlistcore.data.RemoteActions
  */
 open class DefaultMediaSessionControlsReceiver : BroadcastReceiver() {
     companion object {
-        private val TAG = "DefaultControlsReceiver"
+        private const val TAG = "DefaultControlsReceiver"
     }
 
     override fun onReceive(context: Context, intent: Intent) {
@@ -127,7 +127,6 @@ open class DefaultMediaSessionControlsReceiver : BroadcastReceiver() {
     ): PendingIntent {
         val intent = Intent(context, serviceClass)
         intent.action = action
-
         return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
     }
 

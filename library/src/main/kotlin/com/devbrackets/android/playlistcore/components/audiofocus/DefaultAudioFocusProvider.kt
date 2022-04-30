@@ -24,6 +24,7 @@ import com.devbrackets.android.playlistcore.util.SimplifiedAudioManager
 
 open class DefaultAudioFocusProvider<I : PlaylistItem>(context: Context) : AudioFocusProvider<I>,
     AudioManager.OnAudioFocusChangeListener {
+
     companion object {
         const val AUDIOFOCUS_NONE = 0
     }

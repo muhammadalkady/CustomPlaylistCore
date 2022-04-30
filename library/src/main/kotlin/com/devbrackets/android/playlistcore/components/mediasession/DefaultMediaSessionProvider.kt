@@ -31,6 +31,7 @@ import com.devbrackets.android.playlistcore.data.RemoteActions
 
 open class DefaultMediaSessionProvider(val context: Context, val serviceClass: Class<out Service>) :
     MediaSessionCompat.Callback(), MediaSessionProvider {
+
     companion object {
         const val SESSION_TAG = "DefaultMediaSessionProvider.Session"
         const val RECEIVER_EXTRA_CLASS = "com.devbrackets.android.playlistcore.RECEIVER_EXTRA_CLASS"
@@ -41,7 +42,6 @@ open class DefaultMediaSessionProvider(val context: Context, val serviceClass: C
     protected var nextPendingIntent = createPendingIntent(RemoteActions.ACTION_NEXT, serviceClass)
     protected var previousPendingIntent =
         createPendingIntent(RemoteActions.ACTION_PREVIOUS, serviceClass)
-
     protected val mediaSession: MediaSessionCompat by lazy {
         val componentName =
             ComponentName(context, DefaultMediaSessionControlsReceiver::class.java.name)

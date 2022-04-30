@@ -19,6 +19,7 @@ import com.devbrackets.android.playlistcore.api.PlaylistItem
 import com.devbrackets.android.playlistcore.components.playlisthandler.PlaylistHandler
 
 interface AudioFocusProvider<I : PlaylistItem> {
+
     fun setPlaylistHandler(playlistHandler: PlaylistHandler<I>)
 
     fun refreshFocus()
