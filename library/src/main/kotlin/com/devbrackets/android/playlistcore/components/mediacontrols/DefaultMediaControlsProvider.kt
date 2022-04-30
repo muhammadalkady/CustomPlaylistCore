@@ -37,7 +37,11 @@ open class DefaultMediaControlsProvider(protected val context: Context) : MediaC
         //Updates the available playback controls
         val playbackStateBuilder = PlaybackStateCompat.Builder()
         playbackStateBuilder.setActions(getPlaybackOptions(mediaInfo.mediaState))
-        playbackStateBuilder.setState(getPlaybackState(mediaInfo.mediaState.isPlaying), PlaybackStateCompat.PLAYBACK_POSITION_UNKNOWN, 1.0f)
+        playbackStateBuilder.setState(
+            getPlaybackState(mediaInfo.mediaState.isPlaying),
+            PlaybackStateCompat.PLAYBACK_POSITION_UNKNOWN,
+            1.0f
+        )
 
         mediaSession.setPlaybackState(playbackStateBuilder.build())
 
@@ -59,7 +63,8 @@ open class DefaultMediaControlsProvider(protected val context: Context) : MediaC
      */
     @PlaybackStateCompat.Actions
     protected open fun getPlaybackOptions(mediaState: MediaInfo.MediaState): Long {
-        var availableActions = PlaybackStateCompat.ACTION_PLAY or PlaybackStateCompat.ACTION_PAUSE or PlaybackStateCompat.ACTION_PLAY_PAUSE
+        var availableActions =
+            PlaybackStateCompat.ACTION_PLAY or PlaybackStateCompat.ACTION_PAUSE or PlaybackStateCompat.ACTION_PLAY_PAUSE
 
         if (mediaState.isNextEnabled) {
             availableActions = availableActions or PlaybackStateCompat.ACTION_SKIP_TO_NEXT

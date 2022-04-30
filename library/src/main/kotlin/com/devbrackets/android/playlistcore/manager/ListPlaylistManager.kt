@@ -26,8 +26,11 @@ import com.devbrackets.android.playlistcore.api.PlaylistItem
  *
  * {@inheritDoc}
  */
-open class ListPlaylistManager<I : PlaylistItem>(application: Application, mediaServiceClass: Class<out Service>) :
-        BasePlaylistManager<I>(application, mediaServiceClass) {
+open class ListPlaylistManager<I : PlaylistItem>(
+    application: Application,
+    mediaServiceClass: Class<out Service>
+) :
+    BasePlaylistManager<I>(application, mediaServiceClass) {
     protected var items: List<I>? = null
 
     override val itemCount: Int
@@ -60,7 +63,12 @@ open class ListPlaylistManager<I : PlaylistItem>(application: Application, media
      * @param playbackPosition The playback position in the item located at `startPosition` to start at in milliseconds
      * @param startPaused True if the media item should start paused instead of playing
      */
-    open fun play(items: List<I>?, @IntRange(from = 0) startPosition: Int, @IntRange(from = 0) playbackPosition: Int, startPaused: Boolean) {
+    open fun play(
+        items: List<I>?,
+        @IntRange(from = 0) startPosition: Int,
+        @IntRange(from = 0) playbackPosition: Int,
+        startPaused: Boolean
+    ) {
         setParameters(items, startPosition)
         play(playbackPosition.toLong(), startPaused)
     }

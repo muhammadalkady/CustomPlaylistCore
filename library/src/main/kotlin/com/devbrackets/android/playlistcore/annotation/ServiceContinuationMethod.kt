@@ -20,9 +20,9 @@ import android.app.Service
 import androidx.annotation.IntDef
 
 @IntDef(
-        Service.START_STICKY,
-        Service.START_NOT_STICKY,
-        Service.START_REDELIVER_INTENT
+    Service.START_STICKY,
+    Service.START_NOT_STICKY,
+    Service.START_REDELIVER_INTENT
 )
 @Retention(AnnotationRetention.SOURCE)
 annotation class ServiceContinuationMethod

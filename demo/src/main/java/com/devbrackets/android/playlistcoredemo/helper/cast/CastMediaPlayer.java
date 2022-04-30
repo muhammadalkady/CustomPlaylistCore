@@ -63,6 +63,7 @@ public class CastMediaPlayer implements MediaPlayerApi<MediaItem> {
     private SeekResultCallback seekResultCallback = new SeekResultCallback();
     @NonNull
     private PreparedResultCallback preparedResultCallback = new PreparedResultCallback();
+
     public CastMediaPlayer(@NonNull Context context, @NonNull OnConnectionChangeListener stateListener, @NonNull OnMediaInfoChangeListener infoChangeListener) {
         this.stateListener = stateListener;
         this.infoChangeListener = infoChangeListener;

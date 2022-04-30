@@ -19,11 +19,12 @@ package com.devbrackets.android.playlistcore.annotation
 import androidx.annotation.IntDef
 import com.devbrackets.android.playlistcore.manager.BasePlaylistManager
 
-@IntDef(flag = true,
-        value = [
-            BasePlaylistManager.AUDIO,
-            BasePlaylistManager.VIDEO
-        ]
+@IntDef(
+    flag = true,
+    value = [
+        BasePlaylistManager.AUDIO,
+        BasePlaylistManager.VIDEO
+    ]
 )
 @Retention(AnnotationRetention.SOURCE)
 annotation class SupportedMediaType

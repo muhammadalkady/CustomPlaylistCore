@@ -3,16 +3,16 @@ apply plugin: 'kotlin-android'
 apply plugin: 'maven-publish'
 
 afterEvaluate {
-  publishing {
-    publications {
-      release(MavenPublication) {
-        from components.release
-        groupId = 'kady.muhammad'
-        artifactId = 'CustomPlaylistCore'
-        version = '1.0.0'
-      }
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'kady.muhammad'
+                artifactId = 'CustomPlaylistCore'
+                version = '1.0.0'
+            }
+        }
     }
-  }
 }
 
 /**
@@ -20,46 +20,44 @@ afterEvaluate {
  * bintray plugin to publish the artifact
  */
 class LibraryInfo {
-  static Integer versionMajor = 2
-  static Integer versionMinor = 0
-  static Integer versionPatch = 1
+    static Integer versionMajor = 2
+    static Integer versionMinor = 0
+    static Integer versionPatch = 1
 
-  static String artifactId = 'playlistcore'
-  static String groupId = 'com.devbrackets.android'
-  static String versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
-  static Integer versionCode = versionMajor * 10_000 + versionMinor * 1_000 + versionPatch * 100
+    static String artifactId = 'playlistcore'
+    static String groupId = 'com.devbrackets.android'
+    static String versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
+    static Integer versionCode = versionMajor * 10_000 + versionMinor * 1_000 + versionPatch * 100
 }
 
 static def getLibraryInfo() {
-  return new LibraryInfo()
+    return new LibraryInfo()
 }
 
 dependencies {
-  // Kotlin
-  api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    // Kotlin
+    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
-  // Android
-  api 'androidx.media:media:1.6.0'
+    // Android
+    api 'androidx.media:media:1.6.0'
 }
 
 android {
-  compileSdkVersion 32
+    compileSdkVersion 32
 
-  defaultConfig {
-    minSdkVersion 21
-    targetSdkVersion 32
-  }
-
-  lintOptions {
-    abortOnError false
-  }
-
-  sourceSets {
-    main.java.srcDirs += 'src/main/kotlin'
-  }
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 32
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    lint {
+        abortOnError false
+    }
 }
 
 // Disables javadoc because it fails on kotlin files
 tasks.withType(Javadoc).all {
-  enabled = false
+    enabled = false
 }

@@ -72,7 +72,10 @@ interface MediaPlayerApi<I : PlaylistItem> {
 
     fun release()
 
-    fun setVolume(@FloatRange(from = 0.0, to = 1.0) left: Float, @FloatRange(from = 0.0, to = 1.0) right: Float)
+    fun setVolume(
+        @FloatRange(from = 0.0, to = 1.0) left: Float,
+        @FloatRange(from = 0.0, to = 1.0) right: Float
+    )
 
     fun seekTo(@IntRange(from = 0) milliseconds: Long)
 

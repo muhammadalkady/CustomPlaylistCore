@@ -16,8 +16,8 @@
 
 package com.devbrackets.android.playlistcore.util
 
-import androidx.annotation.IntRange
 import android.util.Log
+import androidx.annotation.IntRange
 import com.devbrackets.android.playlistcore.api.MediaPlayerApi
 import com.devbrackets.android.playlistcore.api.PlaylistItem
 import com.devbrackets.android.playlistcore.data.MediaProgress

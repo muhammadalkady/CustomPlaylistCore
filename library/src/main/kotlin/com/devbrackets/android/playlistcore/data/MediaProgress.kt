@@ -49,7 +49,8 @@ class MediaProgress(position: Long, bufferPercent: Int, duration: Long) {
     var bufferPercent: Int = 0
         set(bufferPercent) {
             field = Math.min(MAX_BUFFER_PERCENT, Math.max(0, bufferPercent))
-            this.bufferPercentFloat = if (field == MAX_BUFFER_PERCENT) field.toFloat() else field.toFloat() / MAX_BUFFER_PERCENT.toFloat()
+            this.bufferPercentFloat =
+                if (field == MAX_BUFFER_PERCENT) field.toFloat() else field.toFloat() / MAX_BUFFER_PERCENT.toFloat()
         }
 
     var bufferPercentFloat: Float = 0.toFloat()

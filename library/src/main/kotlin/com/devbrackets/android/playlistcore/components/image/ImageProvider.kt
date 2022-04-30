@@ -19,7 +19,7 @@ import android.graphics.Bitmap
 import androidx.annotation.DrawableRes
 import com.devbrackets.android.playlistcore.api.PlaylistItem
 
-interface ImageProvider<in I: PlaylistItem> {
+interface ImageProvider<in I : PlaylistItem> {
 
     /**
      * Retrieves the Drawable resource that specifies the icon to place in the

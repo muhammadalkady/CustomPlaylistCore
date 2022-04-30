@@ -31,6 +31,7 @@ public class MediaImageProvider implements ImageProvider<MediaItem> {
     private Bitmap notificationImage;
     @Nullable
     private Bitmap artworkImage;
+
     public MediaImageProvider(@NonNull Context context, @NonNull OnImageUpdatedListener listener) {
         glide = Glide.with(context.getApplicationContext());
         this.listener = listener;

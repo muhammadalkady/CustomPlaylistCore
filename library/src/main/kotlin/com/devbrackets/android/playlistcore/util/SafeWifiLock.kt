@@ -27,8 +27,16 @@ open class SafeWifiLock(context: Context) {
 
     init {
         //Attempts to obtain the wifi lock only if the manifest has requested the permission
-        if (context.packageManager.checkPermission(Manifest.permission.WAKE_LOCK, context.packageName) == PackageManager.PERMISSION_GRANTED) {
-            wifiLock = (context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager).createWifiLock(WifiManager.WIFI_MODE_FULL, "mcLock")
+        if (context.packageManager.checkPermission(
+                Manifest.permission.WAKE_LOCK,
+                context.packageName
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            wifiLock =
+                (context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager).createWifiLock(
+                    WifiManager.WIFI_MODE_FULL,
+                    "mcLock"
+                )
             wifiLock?.setReferenceCounted(false)
         } else {
             Log.e("SafeWifiLock", "Unable to acquire WAKE_LOCK due to missing manifest permission")

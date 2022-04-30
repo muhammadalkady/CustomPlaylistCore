@@ -17,8 +17,8 @@
 package com.devbrackets.android.playlistcore.listener
 
 import com.devbrackets.android.playlistcore.api.PlaylistItem
-import com.devbrackets.android.playlistcore.service.BasePlaylistService
 import com.devbrackets.android.playlistcore.data.PlaybackState
+import com.devbrackets.android.playlistcore.service.BasePlaylistService
 
 /**
  * A simple callback interface for listening to [BasePlaylistService]

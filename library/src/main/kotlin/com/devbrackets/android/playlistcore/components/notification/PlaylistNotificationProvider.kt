@@ -26,5 +26,9 @@ import com.devbrackets.android.playlistcore.data.MediaInfo
  * for the Playlist.
  */
 interface PlaylistNotificationProvider {
-    fun buildNotification(info: MediaInfo, mediaSession: MediaSessionCompat, serviceClass: Class<out Service>) : Notification
+    fun buildNotification(
+        info: MediaInfo,
+        mediaSession: MediaSessionCompat,
+        serviceClass: Class<out Service>
+    ): Notification
 }

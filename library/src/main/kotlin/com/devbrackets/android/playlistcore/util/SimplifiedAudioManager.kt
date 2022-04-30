@@ -25,11 +25,16 @@ import android.media.AudioManager
 import android.os.Build
 
 open class SimplifiedAudioManager(context: Context) {
-    protected val audioManager: AudioManager = context.applicationContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+    protected val audioManager: AudioManager =
+        context.applicationContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
     protected var currentAudioFocusRequest: Any? = null
 
     @SuppressLint("NewApi")
-    open fun requestAudioFocus(listener: AudioManager.OnAudioFocusChangeListener, streamType: Int, durationHint: Int): Int {
+    open fun requestAudioFocus(
+        listener: AudioManager.OnAudioFocusChangeListener,
+        streamType: Int,
+        durationHint: Int
+    ): Int {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             @Suppress("DEPRECATION")
             return audioManager.requestAudioFocus(listener, streamType, durationHint)
@@ -50,16 +55,19 @@ open class SimplifiedAudioManager(context: Context) {
     }
 
     @TargetApi(Build.VERSION_CODES.O)
-    protected open fun buildAudioFocusRequest(listener: AudioManager.OnAudioFocusChangeListener, streamType: Int): AudioFocusRequest {
+    protected open fun buildAudioFocusRequest(
+        listener: AudioManager.OnAudioFocusChangeListener,
+        streamType: Int
+    ): AudioFocusRequest {
         val audioAttributes = AudioAttributes.Builder()
-                .setContentType(mapStreamTypeToContentType(streamType))
-                .build()
+            .setContentType(mapStreamTypeToContentType(streamType))
+            .build()
 
         return AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
-                .setOnAudioFocusChangeListener(listener)
-                .setAudioAttributes(audioAttributes)
-                .setWillPauseWhenDucked(true)
-                .build()
+            .setOnAudioFocusChangeListener(listener)
+            .setAudioAttributes(audioAttributes)
+            .setWillPauseWhenDucked(true)
+            .build()
     }
 
     @TargetApi(Build.VERSION_CODES.O)

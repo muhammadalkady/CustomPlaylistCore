@@ -2,8 +2,8 @@ package com.devbrackets.android.playlistcore.listener
 
 import androidx.annotation.IntRange
 import com.devbrackets.android.playlistcore.api.MediaPlayerApi
-import com.devbrackets.android.playlistcore.data.MediaProgress
 import com.devbrackets.android.playlistcore.api.PlaylistItem
+import com.devbrackets.android.playlistcore.data.MediaProgress
 
 /**
  * Interface definition of a callback to be invoked indicating
@@ -29,7 +29,13 @@ interface MediaStatusListener<I : PlaylistItem> {
      * @param mediaPlayer The MediaPlayerApi the update pertains to
      * @param percent The integer percent that is buffered [0, {@value MediaProgress#MAX_BUFFER_PERCENT}] inclusive
      */
-    fun onBufferingUpdate(mediaPlayer: MediaPlayerApi<I>, @IntRange(from = 0, to = MediaProgress.MAX_BUFFER_PERCENT.toLong()) percent: Int)
+    fun onBufferingUpdate(
+        mediaPlayer: MediaPlayerApi<I>,
+        @IntRange(
+            from = 0,
+            to = MediaProgress.MAX_BUFFER_PERCENT.toLong()
+        ) percent: Int
+    )
 
     /**
      * Called to indicate the completion of a seek operation.

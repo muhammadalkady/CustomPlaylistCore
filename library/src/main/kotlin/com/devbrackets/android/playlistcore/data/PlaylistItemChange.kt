@@ -19,7 +19,7 @@ package com.devbrackets.android.playlistcore.data
 import com.devbrackets.android.playlistcore.api.PlaylistItem
 
 data class PlaylistItemChange<out T : PlaylistItem>(
-        val currentItem: T?,
-        val hasPrevious: Boolean,
-        val hasNext: Boolean
+    val currentItem: T?,
+    val hasPrevious: Boolean,
+    val hasNext: Boolean
 )

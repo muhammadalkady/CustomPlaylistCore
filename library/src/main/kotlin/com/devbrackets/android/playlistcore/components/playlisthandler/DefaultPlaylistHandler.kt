@@ -45,15 +45,15 @@ import com.devbrackets.android.playlistcore.util.SafeWifiLock
 
 @Suppress("MemberVisibilityCanPrivate")
 open class DefaultPlaylistHandler<I : PlaylistItem, out M : BasePlaylistManager<I>> protected constructor(
-        protected val context: Context,
-        protected val serviceClass: Class<out Service>,
-        protected val playlistManager: M,
-        protected val imageProvider: ImageProvider<I>,
-        protected val notificationProvider: PlaylistNotificationProvider,
-        protected val mediaSessionProvider: MediaSessionProvider,
-        protected val mediaControlsProvider: MediaControlsProvider,
-        protected val audioFocusProvider: AudioFocusProvider<I>,
-        var listener: Listener<I>?
+    protected val context: Context,
+    protected val serviceClass: Class<out Service>,
+    protected val playlistManager: M,
+    protected val imageProvider: ImageProvider<I>,
+    protected val notificationProvider: PlaylistNotificationProvider,
+    protected val mediaSessionProvider: MediaSessionProvider,
+    protected val mediaControlsProvider: MediaControlsProvider,
+    protected val audioFocusProvider: AudioFocusProvider<I>,
+    var listener: Listener<I>?
 ) : PlaylistHandler<I>(playlistManager.mediaPlayers), ProgressListener, MediaStatusListener<I> {
 
     companion object {
@@ -252,7 +252,14 @@ open class DefaultPlaylistHandler<I : PlaylistItem, out M : BasePlaylistManager<
     }
 
     protected open fun setupForeground() {
-        serviceCallbacks.runAsForeground(notificationId, notificationProvider.buildNotification(mediaInfo, mediaSessionProvider.get(), serviceClass))
+        serviceCallbacks.runAsForeground(
+            notificationId,
+            notificationProvider.buildNotification(
+                mediaInfo,
+                mediaSessionProvider.get(),
+                serviceClass
+            )
+        )
     }
 
     /**
@@ -310,7 +317,14 @@ open class DefaultPlaylistHandler<I : PlaylistItem, out M : BasePlaylistManager<
         mediaControlsProvider.update(mediaInfo, mediaSessionProvider.get())
 
         // Updates the notification
-        notificationManager.notify(mediaInfo.notificationId, notificationProvider.buildNotification(mediaInfo, mediaSessionProvider.get(), serviceClass))
+        notificationManager.notify(
+            mediaInfo.notificationId,
+            notificationProvider.buildNotification(
+                mediaInfo,
+                mediaSessionProvider.get(),
+                serviceClass
+            )
+        )
     }
 
     override fun refreshCurrentMediaPlayer() {
@@ -329,11 +343,17 @@ open class DefaultPlaylistHandler<I : PlaylistItem, out M : BasePlaylistManager<
         }
     }
 
-    override fun onRemoteMediaPlayerConnectionChange(mediaPlayer: MediaPlayerApi<I>, state: MediaPlayerApi.RemoteConnectionState) {
+    override fun onRemoteMediaPlayerConnectionChange(
+        mediaPlayer: MediaPlayerApi<I>,
+        state: MediaPlayerApi.RemoteConnectionState
+    ) {
         // If the mediaPlayer that changed state is of lower priority than the current one we ignore the change
         currentMediaPlayer?.let {
             if (mediaPlayers.indexOf(it) < mediaPlayers.indexOf(mediaPlayer)) {
-                Log.d(TAG, "Ignoring remote connection state change for $mediaPlayer because it is of lower priority than the current MediaPlayer")
+                Log.d(
+                    TAG,
+                    "Ignoring remote connection state change for $mediaPlayer because it is of lower priority than the current MediaPlayer"
+                )
                 return
             }
         }
@@ -463,7 +483,11 @@ open class DefaultPlaylistHandler<I : PlaylistItem, out M : BasePlaylistManager<
         if (!mediaPlayer.isPlaying && !startPaused) {
             pausedForSeek = seekRequested
             play()
-            playlistManager.playbackStatusListener?.onMediaPlaybackStarted(currentPlaylistItem!!, mediaPlayer.currentPosition, mediaPlayer.duration)
+            playlistManager.playbackStatusListener?.onMediaPlaybackStarted(
+                currentPlaylistItem!!,
+                mediaPlayer.currentPosition,
+                mediaPlayer.duration
+            )
         } else {
             setPlaybackState(PlaybackState.PAUSED)
         }
@@ -503,7 +527,11 @@ open class DefaultPlaylistHandler<I : PlaylistItem, out M : BasePlaylistManager<
             imageProvider.updateImages(it)
         }
 
-        currentItemChange = PlaylistItemChange(item, playlistManager.isPreviousAvailable, playlistManager.isNextAvailable).apply {
+        currentItemChange = PlaylistItemChange(
+            item,
+            playlistManager.isPreviousAvailable,
+            playlistManager.isNextAvailable
+        ).apply {
             playlistManager.onPlaylistItemChanged(currentItem, hasNext, hasPrevious)
         }
     }
@@ -524,10 +552,10 @@ open class DefaultPlaylistHandler<I : PlaylistItem, out M : BasePlaylistManager<
     }
 
     open class Builder<I : PlaylistItem, out M : BasePlaylistManager<I>>(
-            protected val context: Context,
-            protected val serviceClass: Class<out Service>,
-            protected val playlistManager: M,
-            protected val imageProvider: ImageProvider<I>
+        protected val context: Context,
+        protected val serviceClass: Class<out Service>,
+        protected val playlistManager: M,
+        protected val imageProvider: ImageProvider<I>
     ) {
         var notificationProvider: PlaylistNotificationProvider? = null
         var mediaSessionProvider: MediaSessionProvider? = null
@@ -536,15 +564,17 @@ open class DefaultPlaylistHandler<I : PlaylistItem, out M : BasePlaylistManager<
         var listener: Listener<I>? = null
 
         fun build(): DefaultPlaylistHandler<I, M> {
-            return DefaultPlaylistHandler(context,
-                    serviceClass,
-                    playlistManager,
-                    imageProvider,
-                    notificationProvider ?: DefaultPlaylistNotificationProvider(context),
-                    mediaSessionProvider ?: DefaultMediaSessionProvider(context, serviceClass),
-                    mediaControlsProvider ?: DefaultMediaControlsProvider(context),
-                    audioFocusProvider ?: DefaultAudioFocusProvider(context),
-                    listener)
+            return DefaultPlaylistHandler(
+                context,
+                serviceClass,
+                playlistManager,
+                imageProvider,
+                notificationProvider ?: DefaultPlaylistNotificationProvider(context),
+                mediaSessionProvider ?: DefaultMediaSessionProvider(context, serviceClass),
+                mediaControlsProvider ?: DefaultMediaControlsProvider(context),
+                audioFocusProvider ?: DefaultAudioFocusProvider(context),
+                listener
+            )
         }
     }
 }

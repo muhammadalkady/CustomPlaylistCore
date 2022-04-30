@@ -22,7 +22,8 @@ import com.devbrackets.android.playlistcore.api.PlaylistItem
 import com.devbrackets.android.playlistcore.components.playlisthandler.PlaylistHandler
 import com.devbrackets.android.playlistcore.util.SimplifiedAudioManager
 
-open class DefaultAudioFocusProvider<I : PlaylistItem>(context: Context) : AudioFocusProvider<I>, AudioManager.OnAudioFocusChangeListener {
+open class DefaultAudioFocusProvider<I : PlaylistItem>(context: Context) : AudioFocusProvider<I>,
+    AudioManager.OnAudioFocusChangeListener {
     companion object {
         const val AUDIOFOCUS_NONE = 0
     }
@@ -54,7 +55,11 @@ open class DefaultAudioFocusProvider<I : PlaylistItem>(context: Context) : Audio
             return true
         }
 
-        val status = audioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN)
+        val status = audioManager.requestAudioFocus(
+            this,
+            AudioManager.STREAM_MUSIC,
+            AudioManager.AUDIOFOCUS_GAIN
+        )
         return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == status
     }
 

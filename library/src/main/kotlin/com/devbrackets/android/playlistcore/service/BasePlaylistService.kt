@@ -44,7 +44,8 @@ import com.devbrackets.android.playlistcore.manager.BasePlaylistManager
  * to create your own [android.content.BroadcastReceiver] as outlined at
  * [http://developer.android.com/guid/topics/media/mediaplayer.html#noisyintent](http://developer.android.com/guide/topics/media/mediaplayer.html#noisyintent)
  */
-abstract class BasePlaylistService<I : PlaylistItem, out M : BasePlaylistManager<I>> : Service(), ServiceCallbacks {
+abstract class BasePlaylistService<I : PlaylistItem, out M : BasePlaylistManager<I>> : Service(),
+    ServiceCallbacks {
     companion object {
         private val TAG = "BasePlaylistService"
     }
@@ -149,8 +150,10 @@ abstract class BasePlaylistService<I : PlaylistItem, out M : BasePlaylistManager
 
         when (action) {
             RemoteActions.ACTION_START_SERVICE -> {
-                val seekToPosition = extras?.getLong(RemoteActions.ACTION_EXTRA_SEEK_POSITION, -1) ?: -1
-                val startPaused = extras?.getBoolean(RemoteActions.ACTION_EXTRA_START_PAUSED, false) ?: false
+                val seekToPosition =
+                    extras?.getLong(RemoteActions.ACTION_EXTRA_SEEK_POSITION, -1) ?: -1
+                val startPaused =
+                    extras?.getBoolean(RemoteActions.ACTION_EXTRA_START_PAUSED, false) ?: false
                 playlistHandler.startItemPlayback(seekToPosition, startPaused)
             }
             RemoteActions.ACTION_PLAY_PAUSE -> playlistHandler.togglePlayPause()
@@ -158,7 +161,12 @@ abstract class BasePlaylistService<I : PlaylistItem, out M : BasePlaylistManager
             RemoteActions.ACTION_PREVIOUS -> playlistHandler.previous()
             RemoteActions.ACTION_STOP -> playlistHandler.stop()
             RemoteActions.ACTION_SEEK_STARTED -> playlistHandler.startSeek()
-            RemoteActions.ACTION_SEEK_ENDED -> playlistHandler.seek(extras?.getLong(RemoteActions.ACTION_EXTRA_SEEK_POSITION, 0) ?: 0)
+            RemoteActions.ACTION_SEEK_ENDED -> playlistHandler.seek(
+                extras?.getLong(
+                    RemoteActions.ACTION_EXTRA_SEEK_POSITION,
+                    0
+                ) ?: 0
+            )
 
             else -> return false
         }

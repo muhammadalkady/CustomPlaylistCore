@@ -24,7 +24,7 @@ import com.devbrackets.android.playlistcore.data.PlaylistItemChange
 import com.devbrackets.android.playlistcore.listener.ServiceCallbacks
 import com.devbrackets.android.playlistcore.manager.BasePlaylistManager
 
-abstract class PlaylistHandler<I: PlaylistItem>(val mediaPlayers: List<MediaPlayerApi<I>>) {
+abstract class PlaylistHandler<I : PlaylistItem>(val mediaPlayers: List<MediaPlayerApi<I>>) {
 
     /**
      * Retrieves the current item change event which represents any media item changes.
@@ -116,5 +116,8 @@ abstract class PlaylistHandler<I: PlaylistItem>(val mediaPlayers: List<MediaPlay
      * has changed. This should handle swapping between remote and local players
      * on connection and disconnections.
      */
-    abstract fun onRemoteMediaPlayerConnectionChange(mediaPlayer: MediaPlayerApi<I>, state: MediaPlayerApi.RemoteConnectionState)
+    abstract fun onRemoteMediaPlayerConnectionChange(
+        mediaPlayer: MediaPlayerApi<I>,
+        state: MediaPlayerApi.RemoteConnectionState
+    )
 }
