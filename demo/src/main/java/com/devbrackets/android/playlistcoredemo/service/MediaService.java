@@ -50,13 +50,8 @@ public class MediaService extends BasePlaylistService<MediaItem, PlaylistManager
     @NonNull
     @Override
     public PlaylistHandler<MediaItem> newPlaylistHandler() {
-        MediaImageProvider imageProvider = new MediaImageProvider(getApplicationContext(), new MediaImageProvider.OnImageUpdatedListener() {
-            @Override
-            public void onImageUpdated() {
-                getPlaylistHandler().updateMediaControls();
-            }
-        });
-
+        MediaImageProvider imageProvider = new MediaImageProvider(getApplicationContext(),
+                () -> getPlaylistHandler().updateMediaControls());
         return new DefaultPlaylistHandler.Builder<>(
                 getApplicationContext(),
                 getClass(),

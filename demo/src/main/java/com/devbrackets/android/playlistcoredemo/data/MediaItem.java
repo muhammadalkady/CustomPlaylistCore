@@ -10,7 +10,7 @@ import com.devbrackets.android.playlistcoredemo.manager.PlaylistManager;
  */
 public class MediaItem implements PlaylistItem {
     boolean isAudio;
-    private Samples.Sample sample;
+    private final Samples.Sample sample;
 
     public MediaItem(Samples.Sample sample, boolean isAudio) {
         this.sample = sample;

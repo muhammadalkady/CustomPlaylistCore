@@ -16,8 +16,8 @@ public class StartupListAdapter extends BaseAdapter {
     public static final int INDEX_AUDIO_PLAYBACK = 0;
     public static final int INDEX_VIDEO_PLAYBACK = 1;
 
-    private List<String> examplePages;
-    private LayoutInflater inflater;
+    private final List<String> examplePages;
+    private final LayoutInflater inflater;
 
     public StartupListAdapter(Context context) {
         examplePages = new ArrayList<>();

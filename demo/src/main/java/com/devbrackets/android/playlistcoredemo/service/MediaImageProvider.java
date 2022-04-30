@@ -18,15 +18,15 @@ import com.devbrackets.android.playlistcoredemo.data.MediaItem;
 
 public class MediaImageProvider implements ImageProvider<MediaItem> {
     @NonNull
-    private RequestManager glide;
+    private final RequestManager glide;
     @NonNull
-    private OnImageUpdatedListener listener;
+    private final OnImageUpdatedListener listener;
     @NonNull
-    private NotificationImageTarget notificationImageTarget = new NotificationImageTarget();
+    private final NotificationImageTarget notificationImageTarget = new NotificationImageTarget();
     @NonNull
-    private RemoteViewImageTarget remoteViewImageTarget = new RemoteViewImageTarget();
+    private final RemoteViewImageTarget remoteViewImageTarget = new RemoteViewImageTarget();
     @NonNull
-    private Bitmap defaultNotificationImage;
+    private final Bitmap defaultNotificationImage;
     @Nullable
     private Bitmap notificationImage;
     @Nullable

@@ -52,11 +52,11 @@ public class Samples {
      */
     public static class Sample {
         @NonNull
-        private String title;
+        private final String title;
         @NonNull
-        private String mediaUrl;
+        private final String mediaUrl;
         @Nullable
-        private String artworkUrl;
+        private final String artworkUrl;
 
         public Sample(@NonNull String title, @NonNull String mediaUrl) {
             this(title, mediaUrl, null);

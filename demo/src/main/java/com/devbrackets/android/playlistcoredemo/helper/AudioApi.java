@@ -15,17 +15,15 @@ import com.devbrackets.android.playlistcoredemo.data.MediaItem;
 
 public class AudioApi extends BaseMediaApi {
     @NonNull
-    private AudioPlayer audioPlayer;
+    private final AudioPlayer audioPlayer;
 
     public AudioApi(@NonNull Context context) {
-        this.audioPlayer = new AudioPlayer(context.getApplicationContext());
-
+        audioPlayer = new AudioPlayer(context.getApplicationContext());
         audioPlayer.setOnErrorListener(this);
         audioPlayer.setOnPreparedListener(this);
         audioPlayer.setOnCompletionListener(this);
         audioPlayer.setOnSeekCompletionListener(this);
         audioPlayer.setOnBufferUpdateListener(this);
-
         audioPlayer.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK);
         audioPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
     }

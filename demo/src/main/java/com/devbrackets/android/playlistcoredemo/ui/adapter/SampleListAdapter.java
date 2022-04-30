@@ -16,8 +16,8 @@ import java.util.List;
 
 public class SampleListAdapter extends BaseAdapter {
 
-    private List<Samples.Sample> samples;
-    private LayoutInflater inflater;
+    private final List<Samples.Sample> samples;
+    private final LayoutInflater inflater;
 
     public SampleListAdapter(@NonNull Context context, @NonNull List<Samples.Sample> samples) {
         this.samples = samples;

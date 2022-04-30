@@ -52,17 +52,17 @@ public class CastMediaPlayer implements MediaPlayerApi<MediaItem> {
     @NonNull
     private final OnMediaInfoChangeListener infoChangeListener;
     @Nullable
-    private SessionManager sessionManager;
+    private final SessionManager sessionManager;
     @Nullable
     private MediaStatusListener<MediaItem> mediaStatusListener;
     @NonNull
     private RemoteConnectionState remoteConnectionState = RemoteConnectionState.NOT_CONNECTED;
     @NonNull
-    private CastResultCallback castResultCallback = new CastResultCallback();
+    private final CastResultCallback castResultCallback = new CastResultCallback();
     @NonNull
-    private SeekResultCallback seekResultCallback = new SeekResultCallback();
+    private final SeekResultCallback seekResultCallback = new SeekResultCallback();
     @NonNull
-    private PreparedResultCallback preparedResultCallback = new PreparedResultCallback();
+    private final PreparedResultCallback preparedResultCallback = new PreparedResultCallback();
 
     public CastMediaPlayer(@NonNull Context context, @NonNull OnConnectionChangeListener stateListener, @NonNull OnMediaInfoChangeListener infoChangeListener) {
         this.stateListener = stateListener;
@@ -291,13 +291,13 @@ public class CastMediaPlayer implements MediaPlayerApi<MediaItem> {
         }
 
         @Override
-        public void onSessionStarted(Session session, String sessionId) {
+        public void onSessionStarted(Session session, @NonNull String sessionId) {
             updateState(RemoteConnectionState.CONNECTED);
             Log.d(TAG, "Cast session started for session " + session.getSessionId());
         }
 
         @Override
-        public void onSessionStartFailed(Session session, int error) {
+        public void onSessionStartFailed(@NonNull Session session, int error) {
             updateState(RemoteConnectionState.NOT_CONNECTED);
             if (mediaStatusListener != null) {
                 mediaStatusListener.onError(CastMediaPlayer.this);
@@ -318,7 +318,7 @@ public class CastMediaPlayer implements MediaPlayerApi<MediaItem> {
         }
 
         @Override
-        public void onSessionResuming(Session session, String sessionId) {
+        public void onSessionResuming(@NonNull Session session, @NonNull String sessionId) {
             updateState(RemoteConnectionState.CONNECTING);
             Log.d(TAG, "Cast session resuming for session " + sessionId);
         }
@@ -330,7 +330,7 @@ public class CastMediaPlayer implements MediaPlayerApi<MediaItem> {
         }
 
         @Override
-        public void onSessionResumeFailed(Session session, int error) {
+        public void onSessionResumeFailed(@NonNull Session session, int error) {
             updateState(RemoteConnectionState.NOT_CONNECTED);
             if (mediaStatusListener != null) {
                 mediaStatusListener.onPrepared(CastMediaPlayer.this);
@@ -340,7 +340,7 @@ public class CastMediaPlayer implements MediaPlayerApi<MediaItem> {
         }
 
         @Override
-        public void onSessionSuspended(Session session, int reason) {
+        public void onSessionSuspended(@NonNull Session session, int reason) {
             updateState(RemoteConnectionState.NOT_CONNECTED);
             String causeText;
 
