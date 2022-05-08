@@ -127,6 +127,7 @@ abstract class BasePlaylistManager<I : PlaylistItem>(
             }
         }
 
+
     @IntRange(from = INVALID_ID)
     var id = INVALID_ID
 
@@ -146,6 +147,8 @@ abstract class BasePlaylistManager<I : PlaylistItem>(
     protected var previousPendingIntent: PendingIntent? = null
     protected var stopPendingIntent: PendingIntent? = null
     protected var seekStartedPendingIntent: PendingIntent? = null
+
+    abstract val repeatMode: Int
 
     init {
         @Suppress("LeakingThis")

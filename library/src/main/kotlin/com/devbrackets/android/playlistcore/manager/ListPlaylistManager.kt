@@ -88,4 +88,8 @@ open class ListPlaylistManager<I : PlaylistItem>(
         currentPosition = startPosition
         id = BasePlaylistManager.INVALID_ID
     }
+
+    override val repeatMode: Int
+        get() = playlistHandler?.getRepeatMode() ?: 0
+
 }

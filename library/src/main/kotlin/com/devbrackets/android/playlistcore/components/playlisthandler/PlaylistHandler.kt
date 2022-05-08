@@ -102,6 +102,8 @@ abstract class PlaylistHandler<I : PlaylistItem>(val mediaPlayers: List<MediaPla
 
     abstract fun setRepeatMode(repeatMode: Int)
 
+    abstract fun getRepeatMode(): Int
+
     abstract fun startItemPlayback(positionMillis: Long, startPaused: Boolean)
     abstract fun updateMediaControls()
 

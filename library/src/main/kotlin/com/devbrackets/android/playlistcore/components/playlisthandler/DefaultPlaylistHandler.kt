@@ -557,6 +557,10 @@ open class DefaultPlaylistHandler<I : PlaylistItem, out M : BasePlaylistManager<
         playlistManager.invokeSetRepeatMode(repeatMode)
     }
 
+    override fun getRepeatMode(): Int {
+        return playlistManager.repeatMode
+    }
+
     open class Builder<I : PlaylistItem, out M : BasePlaylistManager<I>>(
         protected val context: Context,
         protected val serviceClass: Class<out Service>,
@@ -583,4 +587,5 @@ open class DefaultPlaylistHandler<I : PlaylistItem, out M : BasePlaylistManager<
             )
         }
     }
+
 }
