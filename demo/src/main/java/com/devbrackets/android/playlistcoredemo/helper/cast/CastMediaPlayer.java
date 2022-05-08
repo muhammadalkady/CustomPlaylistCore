@@ -239,6 +239,17 @@ public class CastMediaPlayer implements MediaPlayerApi<MediaItem> {
         stateListener.onCastMediaPlayerConnectionChange(this, state);
     }
 
+    @Override
+    public void setRepeatMode(int repeatMode) {
+        //TODO
+    }
+
+    @Override
+    public int getRepeatMode() {
+        //TODO
+        return 0;
+    }
+
     public interface OnConnectionChangeListener {
         void onCastMediaPlayerConnectionChange(@NonNull CastMediaPlayer player, @NonNull RemoteConnectionState state);
     }

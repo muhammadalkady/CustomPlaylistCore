@@ -33,8 +33,10 @@ object RemoteActions {
     const val ACTION_STOP = PREFIX + "stop"
     const val ACTION_SEEK_STARTED = PREFIX + "seek_started"
     const val ACTION_SEEK_ENDED = PREFIX + "seek_ended"
+    const val ACTION_REPEAT_MODE = PREFIX + "repeat_mode"
 
     //Extras
     const val ACTION_EXTRA_SEEK_POSITION = PREFIX + "seek_position"
+    const val ACTION_EXTRA_REPEAT_MODE = PREFIX + "repeat_mode"
     const val ACTION_EXTRA_START_PAUSED = PREFIX + "start_paused"
 }

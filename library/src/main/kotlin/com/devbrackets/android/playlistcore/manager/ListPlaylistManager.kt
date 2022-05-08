@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package com.devbrackets.android.playlistcore.manager
 
 import android.app.Application

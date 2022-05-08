@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package com.devbrackets.android.playlistcore.components.playlisthandler
 
 import android.app.NotificationManager
@@ -549,6 +551,10 @@ open class DefaultPlaylistHandler<I : PlaylistItem, out M : BasePlaylistManager<
         if (state != PlaybackState.STOPPED && state != PlaybackState.ERROR) {
             updateMediaControls()
         }
+    }
+
+    override fun setRepeatMode(repeatMode: Int) {
+        playlistManager.invokeSetRepeatMode(repeatMode)
     }
 
     open class Builder<I : PlaylistItem, out M : BasePlaylistManager<I>>(

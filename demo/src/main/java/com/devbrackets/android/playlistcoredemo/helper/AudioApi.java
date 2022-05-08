@@ -104,4 +104,15 @@ public class AudioApi extends BaseMediaApi {
     public int getBufferedPercent() {
         return bufferPercent;
     }
+
+    @Override
+    public void setRepeatMode(int repeatMode) {
+        //TODO
+    }
+
+    @Override
+    public int getRepeatMode() {
+        //TODO
+        return 0;
+    }
 }

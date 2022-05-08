@@ -46,8 +46,9 @@ import com.devbrackets.android.playlistcore.manager.BasePlaylistManager
  */
 abstract class BasePlaylistService<I : PlaylistItem, out M : BasePlaylistManager<I>> : Service(),
     ServiceCallbacks {
+    //
     companion object {
-        private val TAG = "BasePlaylistService"
+        private const val TAG = "BasePlaylistService"
     }
 
     protected var inForeground: Boolean = false
@@ -164,6 +165,12 @@ abstract class BasePlaylistService<I : PlaylistItem, out M : BasePlaylistManager
             RemoteActions.ACTION_SEEK_ENDED -> playlistHandler.seek(
                 extras?.getLong(
                     RemoteActions.ACTION_EXTRA_SEEK_POSITION,
+                    0
+                ) ?: 0
+            )
+            RemoteActions.ACTION_EXTRA_REPEAT_MODE -> playlistHandler.setRepeatMode(
+                extras?.getInt(
+                    RemoteActions.ACTION_EXTRA_REPEAT_MODE,
                     0
                 ) ?: 0
             )

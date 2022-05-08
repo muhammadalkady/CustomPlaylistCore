@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package com.devbrackets.android.playlistcore.manager
 
 import android.app.Application
@@ -138,6 +140,7 @@ abstract class BasePlaylistManager<I : PlaylistItem>(
     protected var progressListenersLock = ReentrantLock(true)
 
     protected var seekEndedIntent: Intent? = null
+    protected var repeatModeIntent: Intent? = null
     protected var playPausePendingIntent: PendingIntent? = null
     protected var nextPendingIntent: PendingIntent? = null
     protected var previousPendingIntent: PendingIntent? = null
@@ -447,6 +450,15 @@ abstract class BasePlaylistManager<I : PlaylistItem>(
         }
     }
 
+    open fun invokeSetRepeatMode(repeatMode: Int) {
+        //Tries to start the intent
+        repeatModeIntent?.let {
+            it.putExtra(RemoteActions.ACTION_EXTRA_REPEAT_MODE, repeatMode)
+            application.startService(it)
+        }
+    }
+
+
     protected inline fun <T> notifyListeners(
         lock: ReentrantLock,
         list: MutableList<WeakReference<T>>,
@@ -495,9 +507,14 @@ abstract class BasePlaylistManager<I : PlaylistItem>(
         seekStartedPendingIntent =
             createPendingIntent(application, mediaServiceClass, RemoteActions.ACTION_SEEK_STARTED)
 
+        repeatModeIntent =
+            Intent(application, mediaServiceClass).apply {
+                action = RemoteActions.ACTION_REPEAT_MODE
+            }
         seekEndedIntent = Intent(application, mediaServiceClass).apply {
             action = RemoteActions.ACTION_SEEK_ENDED
         }
+
     }
 
     /**
@@ -538,4 +555,5 @@ abstract class BasePlaylistManager<I : PlaylistItem>(
             else -> PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         }
     }
+
 }
