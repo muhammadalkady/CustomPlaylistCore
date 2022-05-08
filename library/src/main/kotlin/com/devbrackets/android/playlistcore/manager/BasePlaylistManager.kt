@@ -454,11 +454,7 @@ abstract class BasePlaylistManager<I : PlaylistItem>(
     }
 
     open fun invokeSetRepeatMode(repeatMode: Int) {
-        //Tries to start the intent
-        repeatModeIntent?.let {
-            it.putExtra(RemoteActions.ACTION_EXTRA_REPEAT_MODE, repeatMode)
-            application.startService(it)
-        }
+       playlistHandler?.setRepeatMode(repeatMode)
     }
 
 
