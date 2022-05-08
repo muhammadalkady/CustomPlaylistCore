@@ -554,11 +554,11 @@ open class DefaultPlaylistHandler<I : PlaylistItem, out M : BasePlaylistManager<
     }
 
     override fun setRepeatMode(repeatMode: Int) {
-        playlistManager.invokeSetRepeatMode(repeatMode)
+        currentMediaPlayer?.setRepeatMode(repeatMode)
     }
 
     override fun getRepeatMode(): Int {
-        return playlistManager.repeatMode
+        return currentMediaPlayer?.getRepeatMode() ?: 0
     }
 
     open class Builder<I : PlaylistItem, out M : BasePlaylistManager<I>>(

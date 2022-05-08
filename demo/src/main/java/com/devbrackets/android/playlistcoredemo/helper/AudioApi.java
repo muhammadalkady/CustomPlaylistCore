@@ -59,7 +59,8 @@ public class AudioApi extends BaseMediaApi {
     }
 
     @Override
-    public void setVolume(@FloatRange(from = 0.0, to = 1.0) float left, @FloatRange(from = 0.0, to = 1.0) float right) {
+    public void setVolume(@FloatRange(from = 0.0, to = 1.0) float left,
+                          @FloatRange(from = 0.0, to = 1.0) float right) {
         audioPlayer.setVolume(left, right);
     }
 
@@ -83,7 +84,8 @@ public class AudioApi extends BaseMediaApi {
         try {
             prepared = false;
             bufferPercent = 0;
-            audioPlayer.setDataSource(Uri.parse(item.getDownloaded() ? item.getDownloadedMediaUri() : item.getMediaUrl()));
+            audioPlayer.setDataSource(Uri.parse(item.getDownloaded() ?
+                    item.getDownloadedMediaUri() : item.getMediaUrl()));
             audioPlayer.prepareAsync();
         } catch (Exception e) {
             //Purposefully left blank
