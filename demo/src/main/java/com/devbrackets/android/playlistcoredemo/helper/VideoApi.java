@@ -125,4 +125,14 @@ public class VideoApi extends BaseMediaApi implements PlaylistListener<MediaItem
     public boolean onPlaybackStateChanged(@NonNull PlaybackState playbackState) {
         return false;
     }
+
+    @Override
+    public void setRepeatMode(int repeatMode) {
+
+    }
+
+    @Override
+    public int getRepeatMode() {
+        return 0;
+    }
 }

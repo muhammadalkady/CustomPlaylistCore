@@ -84,4 +84,7 @@ interface MediaPlayerApi<I : PlaylistItem> {
     fun handlesItem(item: I): Boolean
 
     fun playItem(item: I)
+
+    fun setRepeatMode(repeatMode: Int)
+    fun getRepeatMode(): Int
 }
