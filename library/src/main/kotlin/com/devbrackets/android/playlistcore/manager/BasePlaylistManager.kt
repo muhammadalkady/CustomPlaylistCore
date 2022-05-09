@@ -37,8 +37,6 @@ import com.devbrackets.android.playlistcore.service.BasePlaylistService
 import java.lang.ref.WeakReference
 import java.util.*
 import java.util.concurrent.locks.ReentrantLock
-import kotlin.math.max
-import kotlin.math.min
 
 /**
  * A manager to keep track of a playlist of items that a service can use for playback.
@@ -361,7 +359,7 @@ abstract class BasePlaylistManager<I : PlaylistItem>(
      */
     open fun next(): I? {
         if (currentPosition != INVALID_POSITION) {
-            currentPosition = min(currentPosition + 1, itemCount)
+            currentPosition = Math.min(currentPosition + 1, itemCount)
         }
 
         return currentItem
@@ -376,7 +374,7 @@ abstract class BasePlaylistManager<I : PlaylistItem>(
      */
     open fun previous(): I? {
         if (currentPosition != INVALID_POSITION) {
-            currentPosition = max(0, currentPosition - 1)
+            currentPosition = Math.max(0, currentPosition - 1)
         }
 
         return currentItem
