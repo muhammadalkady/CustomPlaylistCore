@@ -21,6 +21,7 @@ import android.app.Service
 import android.content.Context
 import android.util.Log
 import com.devbrackets.android.playlistcore.R
+import com.devbrackets.android.playlistcore.annotation.REPEAT_NONE
 import com.devbrackets.android.playlistcore.api.MediaPlayerApi
 import com.devbrackets.android.playlistcore.api.PlaylistItem
 import com.devbrackets.android.playlistcore.components.audiofocus.AudioFocusProvider
@@ -199,6 +200,14 @@ open class DefaultPlaylistHandler<I : PlaylistItem, out M : BasePlaylistManager<
     override fun onPrepared(mediaPlayer: MediaPlayerApi<I>) {
         startMediaPlayer(mediaPlayer)
         sequentialErrors = 0
+    }
+
+    override fun setRepeatMode(repeatMode: Int) {
+        currentMediaPlayer?.setRepeatMode(repeatMode)
+    }
+
+    override fun getRepeatMode(): Int {
+        return currentMediaPlayer?.getRepeatMode() ?: REPEAT_NONE
     }
 
     override fun onBufferingUpdate(mediaPlayer: MediaPlayerApi<I>, percent: Int) {
@@ -577,4 +586,5 @@ open class DefaultPlaylistHandler<I : PlaylistItem, out M : BasePlaylistManager<
             )
         }
     }
+
 }
