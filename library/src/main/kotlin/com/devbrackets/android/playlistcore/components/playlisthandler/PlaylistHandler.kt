@@ -16,6 +16,7 @@
 
 package com.devbrackets.android.playlistcore.components.playlisthandler
 
+import com.devbrackets.android.playlistcore.annotation.RepeatMode
 import com.devbrackets.android.playlistcore.api.MediaPlayerApi
 import com.devbrackets.android.playlistcore.api.PlaylistItem
 import com.devbrackets.android.playlistcore.data.MediaProgress
@@ -99,6 +100,11 @@ abstract class PlaylistHandler<I : PlaylistItem>(val mediaPlayers: List<MediaPla
      * Informs the handler to perform the actual seek of the media
      */
     abstract fun seek(positionMillis: Long)
+
+    abstract fun setRepeatMode(@RepeatMode repeatMode: Int)
+
+    @RepeatMode
+    abstract fun getRepeatMode(): Int
 
     abstract fun startItemPlayback(positionMillis: Long, startPaused: Boolean)
     abstract fun updateMediaControls()

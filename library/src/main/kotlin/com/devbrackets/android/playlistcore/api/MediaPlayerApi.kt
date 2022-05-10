@@ -18,6 +18,7 @@ package com.devbrackets.android.playlistcore.api
 
 import androidx.annotation.FloatRange
 import androidx.annotation.IntRange
+import com.devbrackets.android.playlistcore.annotation.RepeatMode
 import com.devbrackets.android.playlistcore.data.MediaProgress
 import com.devbrackets.android.playlistcore.listener.MediaStatusListener
 
@@ -61,30 +62,22 @@ interface MediaPlayerApi<I : PlaylistItem> {
      */
     @get:IntRange(from = 0, to = MediaProgress.MAX_BUFFER_PERCENT.toLong())
     val bufferedPercent: Int
-
     fun play()
-
     fun pause()
-
     fun stop()
-
     fun reset()
-
     fun release()
-
     fun setVolume(
         @FloatRange(from = 0.0, to = 1.0) left: Float,
         @FloatRange(from = 0.0, to = 1.0) right: Float
     )
 
     fun seekTo(@IntRange(from = 0) milliseconds: Long)
-
     fun setMediaStatusListener(listener: MediaStatusListener<I>)
-
     fun handlesItem(item: I): Boolean
-
     fun playItem(item: I)
+    fun setRepeatMode(@RepeatMode repeatMode: Int)
 
-    fun setRepeatMode(repeatMode: Int)
+    @RepeatMode
     fun getRepeatMode(): Int
 }
